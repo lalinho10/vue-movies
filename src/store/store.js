@@ -31,7 +31,6 @@ export default new Vuex.Store({
                 axios.get(`/movie/${payload}?api_key=96d4174471b508fca5ba64fda73b00e3&language=es-MX`)
                     .then((response) => {
                         const payload = response.data;
-                        console.log('Película:', payload);
                         context.commit('actualizarSeleccionada', payload);
                         resolve();
                     })

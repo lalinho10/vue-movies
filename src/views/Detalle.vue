@@ -13,11 +13,13 @@
     </v-row>
     <v-row v-else>
         <v-col cols="12" md="4">
-            <img :src="'http://image.tmdb.org/t/p/w300/' + pelicula.poster_path">
+            <img class="poster" :src="'http://image.tmdb.org/t/p/w300/' + pelicula.poster_path">
         </v-col>
         <v-col cols="12" md="8">
             <h1>
-                <a :href="pelicula.homepage" target="_blank">
+                <a class="link--pelicula"
+                    target="_blank"
+                    :href="pelicula.homepage">
                     {{pelicula.title}}
                 </a>
                 <span class="anio">
@@ -26,6 +28,8 @@
             </h1>
             <p>
                 <span>{{generos(pelicula.genres)}}</span>
+                <span class="mx-3">-</span>
+                <span>{{duracion(pelicula.runtime)}}</span>
             </p>
             <p>
                 <v-progress-circular
@@ -57,8 +61,10 @@ export default {
         anio(fecha) {
             return new Date(fecha).getFullYear();
         },
-        duracion() {
-
+        duracion(tiempoMin) {
+            const horas = Math.floor(tiempoMin / 60);
+            const minutos = tiempoMin % 60;
+            return `${horas}h ${minutos}m`
         },
         generos(generos) {
             return generos.map((genero) => genero.name).join(', ');
@@ -75,5 +81,11 @@ export default {
 <style scoped>
 .anio {
     opacity: 0.4;
+}
+.link--pelicula {
+    text-decoration: none;
+}
+.poster {
+    border-radius: 10px;
 }
 </style>
