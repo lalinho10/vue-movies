@@ -5,8 +5,10 @@
         Cartelera
       </h1>
       <v-carousel hide-delimiters>
-        <v-carousel-item>
-          Cartelera 1
+        <v-carousel-item
+          v-for="(pelicula, i) in peliculasCartelera"
+          :key="i"
+          :src="poster(pelicula.poster_path)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -15,8 +17,10 @@
         Populares
       </h1>
       <v-carousel hide-delimiters>
-        <v-carousel-item>
-          Populares 1
+        <v-carousel-item
+          v-for="(pelicula, i) in peliculasPopulares"
+          :key="i"
+          :src="poster(pelicula.poster_path)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -25,8 +29,10 @@
         Animadas
       </h1>
       <v-carousel hide-delimiters>
-        <v-carousel-item>
-          Animadas 1
+        <v-carousel-item
+          v-for="(pelicula, i) in peliculasAnimadas"
+          :key="i"
+          :src="poster(pelicula.poster_path)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -35,5 +41,21 @@
 
 <script>
 export default {
+  data: function() {
+    return {
+      peliculasCartelera: this.$store.state.peliculasCartelera,
+      peliculasPopulares: this.$store.state.peliculasPopulares,
+      peliculasAnimadas: this.$store.state.peliculasAnimadas,
+    }
+  },
+  methods: {
+    poster(poster) {
+      if (poster !== undefined) {
+        return `http://image.tmdb.org/t/p/w200/${poster}`;
+      } else {
+        return `/images/noimage.png`;
+      }
+    }
+  },
 }
 </script>
