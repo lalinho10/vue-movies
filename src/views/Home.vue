@@ -8,7 +8,8 @@
         <v-carousel-item
           v-for="(pelicula, i) in peliculasCartelera"
           :key="i"
-          :src="poster(pelicula.poster_path)">
+          :src="poster(pelicula.poster_path)"
+          @click="detallePelicula(pelicula.id)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -20,7 +21,8 @@
         <v-carousel-item
           v-for="(pelicula, i) in peliculasPopulares"
           :key="i"
-          :src="poster(pelicula.poster_path)">
+          :src="poster(pelicula.poster_path)"
+          @click="detallePelicula(pelicula.id)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -32,7 +34,8 @@
         <v-carousel-item
           v-for="(pelicula, i) in peliculasAnimadas"
           :key="i"
-          :src="poster(pelicula.poster_path)">
+          :src="poster(pelicula.poster_path)"
+          @click="detallePelicula(pelicula.id)">
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -49,6 +52,9 @@ export default {
     }
   },
   methods: {
+    detallePelicula(idPelicula) {
+      this.$router.push(`/detalle/${idPelicula}`);
+    },
     poster(poster) {
       if (poster !== undefined) {
         return `http://image.tmdb.org/t/p/w200/${poster}`;
