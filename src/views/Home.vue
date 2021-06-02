@@ -46,9 +46,9 @@
 export default {
   data: function() {
     return {
-      peliculasCartelera: this.$store.state.peliculasCartelera,
-      peliculasPopulares: this.$store.state.peliculasPopulares,
-      peliculasAnimadas: this.$store.state.peliculasAnimadas,
+      peliculasCartelera: this.$store.state.moduloPeliculas.peliculasCartelera,
+      peliculasPopulares: this.$store.state.moduloPeliculas.peliculasPopulares,
+      peliculasAnimadas: this.$store.state.moduloPeliculas.peliculasAnimadas,
     }
   },
   methods: {

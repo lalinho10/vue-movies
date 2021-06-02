@@ -1,28 +1,28 @@
 <template>
   <div>
     <v-row v-if="!pelicula">
-        <v-col>
+        <v-col class="d-flex flex-column align-center mt-6">
             <v-progress-circular
                 indeterminate
                 color="primary"
                 size="70"
                 width="7">
             </v-progress-circular>
-            <span>Cargando...</span>
+            <p class="mt-6">Cargando...</p>
         </v-col>
     </v-row>
     <v-row v-else>
         <v-col cols="12" md="4">
-            <img class="poster" :src="'http://image.tmdb.org/t/p/w300/' + pelicula.poster_path">
+            <img class="rounded-lg" :src="'http://image.tmdb.org/t/p/w300/' + pelicula.poster_path">
         </v-col>
         <v-col cols="12" md="8">
             <h1>
-                <a class="link--pelicula"
+                <a class="text-decoration-none"
                     target="_blank"
                     :href="pelicula.homepage">
                     {{pelicula.title}}
                 </a>
-                <span class="anio">
+                <span class="text--disabled">
                     ({{anio(pelicula.release_date)}})
                 </span>
             </h1>
@@ -72,20 +72,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('obtenerPelicula', this.$route.params.id)
-            .then(() => this.pelicula = this.$store.state.peliculaSeleccionada);
+            .then(() => this.pelicula = this.$store.state.moduloPeliculas.peliculaSeleccionada);
     }
 }
 </script>
-
-
-<style scoped>
-.anio {
-    opacity: 0.4;
-}
-.link--pelicula {
-    text-decoration: none;
-}
-.poster {
-    border-radius: 10px;
-}
-</style>
