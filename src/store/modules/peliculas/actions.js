@@ -17,7 +17,6 @@ export const obtenerCartelera = (context) => {
         axios.get('movie/now_playing?api_key=96d4174471b508fca5ba64fda73b00e3&language=es-MX&page=1')
             .then((response) => {
                 const payload = response.data.results;
-                console.log('Cartelera', payload)
                 context.commit('actualizarCartelera', payload);
                 resolve();
             })

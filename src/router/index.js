@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Contacto from '../views/Contacto.vue'
 import Detalle from '../views/Detalle.vue'
+import Error404 from '../views/Error404.vue'
 import Home from '../views/Home.vue'
 import Lista from '../views/Lista.vue'
 
@@ -27,6 +28,10 @@ const routes = [
     component: Contacto,
     /* name: 'About',
     component: () => import('../views/Contacto.vue')*/
+  },
+  {
+    path: '*',
+    component: Error404,
   },
 ]
 
