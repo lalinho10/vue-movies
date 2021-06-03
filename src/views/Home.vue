@@ -4,6 +4,10 @@
       <h1 class="text-center">
         Cartelera
       </h1>
+      <!--span v-for="(pelicula, i) in peliculasCartelera"
+        :key="i">
+        {{poster(pelicula.poster_path)}}
+      </span-->
       <v-carousel hide-delimiters>
         <v-carousel-item
           v-for="(pelicula, i) in peliculasCartelera"
@@ -55,13 +59,6 @@ export default {
     detallePelicula(idPelicula) {
       this.$router.push(`/detalle/${idPelicula}`);
     },
-    poster(poster) {
-      if (poster !== undefined) {
-        return `http://image.tmdb.org/t/p/w200/${poster}`;
-      } else {
-        return `/images/noimage.png`;
-      }
-    }
   },
 }
 </script>

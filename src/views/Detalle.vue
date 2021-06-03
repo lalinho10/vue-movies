@@ -13,7 +13,7 @@
     </v-row>
     <v-row v-else>
         <v-col cols="12" md="4">
-            <img class="rounded-lg" :src="'http://image.tmdb.org/t/p/w300/' + pelicula.poster_path">
+            <img class="rounded-lg" :src="poster(pelicula.poster_path, 300)">
         </v-col>
         <v-col cols="12" md="8">
             <h1>

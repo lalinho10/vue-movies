@@ -17,7 +17,7 @@
 
       <template v-slot:item="data">
         <v-list-item-avatar>
-          <img :src="'http://image.tmdb.org/t/p/w200' + data.item.poster_path">
+          <img :src="poster(data.item.poster_path)">
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>
