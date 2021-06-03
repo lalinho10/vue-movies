@@ -3,6 +3,10 @@ import * as actions from './actions';
 
 const moduloPeliculas = {
     state: () => ({
+        elenco: [],
+        personal: [],
+        posters: [],
+        fondos: [],
         peliculaSeleccionada: {},
         peliculasCartelera: [],
         peliculasPopulares: [],
