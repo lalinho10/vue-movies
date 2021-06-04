@@ -9,18 +9,32 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <router-view/>
+        <cargando v-if="cargando" />
+        <router-view v-else />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Cargando from './components/Cargando.vue'
+
 export default {
+  components: {
+    'cargando': Cargando
+  },
+  data() {
+    return {
+      cargando: true,
+    }
+  },
   mounted() {
-    this.$store.dispatch('obtenerCartelera')
-    this.$store.dispatch('obtenerPopulares')
-    this.$store.dispatch('obtenerAnimadas')
+    const cartelera = this.$store.dispatch('obtenerCartelera')
+    const populares = this.$store.dispatch('obtenerPopulares')
+    const animadas = this.$store.dispatch('obtenerAnimadas')
+
+    Promise.all([cartelera, populares, animadas])
+      .then(() => this.cargando = false)
   }
 }
 </script>

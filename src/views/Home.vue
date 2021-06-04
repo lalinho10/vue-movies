@@ -4,10 +4,6 @@
       <h1 class="text-center">
         Cartelera
       </h1>
-      <!--span v-for="(pelicula, i) in peliculasCartelera"
-        :key="i">
-        {{poster(pelicula.poster_path)}}
-      </span-->
       <v-carousel hide-delimiters>
         <v-carousel-item
           v-for="(pelicula, i) in peliculasCartelera"
