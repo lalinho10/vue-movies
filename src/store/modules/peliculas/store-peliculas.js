@@ -1,5 +1,5 @@
-import * as mutations from './mutations'
 import * as actions from './actions';
+import * as mutations from './mutations'
 
 const moduloPeliculas = {
     state: () => ({
@@ -13,7 +13,7 @@ const moduloPeliculas = {
         peliculasAnimadas: [],
     }),
     mutations,
-    actions
+    actions,
 };
 
 export default moduloPeliculas;
