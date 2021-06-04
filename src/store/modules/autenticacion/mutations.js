@@ -2,7 +2,7 @@ export const actualizarToken = (state, payload) => {
     state.token = payload;
 }
 
-export const actulizarTokenExpiration = (state, payload) => {
+export const actualizarTokenExpiration = (state, payload) => {
     state.tokenExpiration = payload;
 }
 

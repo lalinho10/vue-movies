@@ -5,7 +5,7 @@ export const obtenerToken = (context) => {
         axios.get(`/authentication/token/new?api_key=96d4174471b508fca5ba64fda73b00e3`)
             .then((response) => {
                 context.commit('actualizarToken', response.data.request_token);
-                context.commit('actulizarTokenExpiration', response.data.expires_at);
+                context.commit('actualizarTokenExpiration', response.data.expires_at);
                 resolve();
             })
             .catch(() => reject());
@@ -15,7 +15,7 @@ export const obtenerToken = (context) => {
 export const obtenerSessionID = (context) => {
     return new Promise((resolve, reject) => {
         axios.post(`/authentication/session/new?api_key=96d4174471b508fca5ba64fda73b00e3`, {
-            request_token: context.state.sessionId,
+            request_token: context.state.token,
         })
         .then((response) => {
             context.commit('actualizarSessionId', response.data.session_id);
