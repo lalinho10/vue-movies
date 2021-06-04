@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const obtenerPelicula = (context, payload) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/movie/${payload}?api_key=96d4174471b508fca5ba64fda73b00e3&language=es-MX`)
+        axios.get(`/movie/${payload}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=es-MX`)
             .then((response) => {
                 context.commit('actualizarSeleccionada', response.data);
                 resolve();
@@ -13,7 +13,7 @@ export const obtenerPelicula = (context, payload) => {
 
 export const obtenerCreditos = (context, payload) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/movie/${payload}/credits?api_key=96d4174471b508fca5ba64fda73b00e3&language=es-MX`)
+        axios.get(`/movie/${payload}/credits?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=es-MX`)
             .then((response) => {
                 context.commit('actualizarElenco', response.data.cast);
                 context.commit('actualizarPersonal', response.data.crew);
@@ -25,7 +25,7 @@ export const obtenerCreditos = (context, payload) => {
 
 export const obtenerImagenes = (context, payload) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/movie/${payload}/images?api_key=96d4174471b508fca5ba64fda73b00e3`)
+        axios.get(`/movie/${payload}/images?api_key=${process.env.VUE_APP_TMDB_API_KEY}`)
             .then((response) => {
                 context.commit('actualizarPosters', response.data.posters);
                 context.commit('actualizarFondos', response.data.backdrops);
@@ -37,7 +37,7 @@ export const obtenerImagenes = (context, payload) => {
 
 export const obtenerCartelera = (context) => {
     return new Promise((resolve, reject) => {
-        axios.get('movie/now_playing?api_key=96d4174471b508fca5ba64fda73b00e3&language=es-MX&page=1')
+        axios.get(`movie/now_playing?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=es-MX&page=1`)
             .then((response) => {
                 context.commit('actualizarCartelera', response.data.results);
                 resolve();
@@ -48,7 +48,7 @@ export const obtenerCartelera = (context) => {
 
 export const obtenerPopulares = (context) => {
     return new Promise((resolve, reject) => {
-        axios.get('movie/popular?api_key=96d4174471b508fca5ba64fda73b00e3&region=MX&page=1')
+        axios.get(`movie/popular?api_key=${process.env.VUE_APP_TMDB_API_KEY}&region=MX&page=1`)
             .then((response) => {
                 context.commit('actualizarPopulares', response.data.results);
                 resolve();
@@ -59,7 +59,7 @@ export const obtenerPopulares = (context) => {
 
 export const obtenerAnimadas = (context) => {
     return new Promise((resolve, reject) => {
-        axios.get('/discover/movie?api_key=96d4174471b508fca5ba64fda73b00e3&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16')
+        axios.get(`/discover/movie?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16`)
             .then((response) => {
                 context.commit('actualizarAnimadas', response.data.results);
                 resolve();

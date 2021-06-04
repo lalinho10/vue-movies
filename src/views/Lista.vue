@@ -52,11 +52,11 @@ export default {
   },
   watch: {
     buscar(textoBusqueda) {
-      axios.get(`/search/movie?api_key=96d4174471b508fca5ba64fda73b00e3&include_adult=false&page=1&&language=es-MX&query=${textoBusqueda}`)
+      axios.get(`/search/movie?api_key=${process.env.VUE_APP_TMDB_API_KEY}&include_adult=false&page=1&&language=es-MX&query=${textoBusqueda}`)
         .then((response) => {
           this.resultados = response.data.results;
         })
     }
-  }
+  },
 }
 </script>
