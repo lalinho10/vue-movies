@@ -2,13 +2,14 @@
   <div>
     <h1>Contáctanos</h1>
     <v-divider class="my-2"></v-divider>
-    <form>
+    <v-form ref="formContacto">
       <v-row no-gutters>
         <v-col>
           <v-text-field
             dense
             label="Nombre"
             outlined
+            :rules="[reglas.requerido]"
             v-model="contacto.nombre">
           </v-text-field>
         </v-col>
@@ -22,12 +23,16 @@
             track-color="grey lighten-3"
             thumb-color="primary darken-4"
             thumb-label
+            :rules="[reglas.mayorEdad]"
             v-model="contacto.edad">
           </v-slider>
         </v-col>
         <v-col class="px-4" cols="12" md="6">
           <label>Género</label>
-          <v-radio-group v-model="contacto.genero" row>
+          <v-radio-group
+            :rules="[reglas.requerido]"
+            v-model="contacto.genero"
+            row>
             <v-radio
               color="red"
               label="Femenino"
@@ -52,6 +57,7 @@
             dense
             label="Email"
             outlined
+            :rules="[reglas.requerido, reglas.formatoEmail]"
             v-model="contacto.email">
           </v-text-field>
         </v-col>
@@ -62,6 +68,7 @@
             dense
             label="Tema"
             outlined
+            :rules="[reglas.requerido]"
             v-model="contacto.tema">
           </v-text-field>
         </v-col>
@@ -72,6 +79,7 @@
             dense
             solo
             label="Mensaje"
+            :rules="[reglas.requerido]"
             v-model="contacto.mensaje">
           </v-textarea>
         </v-col>
@@ -81,16 +89,17 @@
           <v-switch
             class="ma-0 pa-0"
             label="Aceptar términos y condiciones"
+            :rules="[reglas.terminos]"
             v-model="contacto.terminos"
           ></v-switch>
         </v-col>
       </v-row>
       <v-row no-gutters justify="end">
         <v-col>
-          <v-btn color="primary">Enviar</v-btn>
+          <v-btn color="primary" @click="guardar">Enviar</v-btn>
         </v-col>
       </v-row>
-    </form>
+    </v-form>
   </div>
 </template>
 
@@ -106,7 +115,31 @@ export default {
         tema: '',
         mensaje: '',
         terminos: false,
+      },
+      reglas: {
+        requerido: value => !!value || 'Campo requerido',
+        mayorEdad: value => value >= 18 || 'Debes ser mayor de 18 años',
+        formatoEmail: v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'email inválido',
+        terminos: value => !!value || 'Debes aceptar los términos y condiciones',
+      },
+    }
+  },
+  methods: {
+    guardar() {
+      if (this.$refs.formContacto.validate()) {
+        console.log(this.contacto)
       }
+    }
+  },
+  beforeRouteLeave(next) {
+    if (!this.$refs.formContacto.validate()) {
+      if (confirm('Hay campos pendientes de capturar en tu formulario. ¿Estás seguro que deseas continuar?')) {
+        next()
+      } else {
+        next(false)
+      }
+    } else {
+      next()
     }
   }
 }
