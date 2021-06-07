@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h1>Mi lista</h1>
+    <h1>Crear lista</h1>
+    <v-row>
+        <v-col cols="12">
+            <v-btn fab top left small to="/usuario">
+                <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
+        </v-col>
+    </v-row>
     <v-autocomplete
       v-model="modelo"
       :items="resultados"

@@ -10,9 +10,12 @@ import Elenco from '../views/Elenco.vue'
 import Error404 from '../views/Error404.vue'
 import Fondos from '../views/Fondos.vue'
 import Home from '../views/Home.vue'
-import Listas from '../views/Listas.vue'
+import Listas from '../views/Listas/Listas.vue'
+import CrearLista from '../views/Listas/CrearLista.vue'
+import DetalleLista from '../views/Listas/DetalleLista.vue'
 import Personal from '../views/Personal.vue'
 import Posters from '../views/Posters.vue'
+import Usuario from '../views/Usuario.vue'
 
 Vue.use(VueRouter)
 
@@ -23,16 +26,6 @@ const routes = [
     component: Home,
   },
   {
-    path: '/listas',
-    component: Listas,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/autorizacion',
-    component: ConfirmacionTMDB,
-    meta: { requiresAuth: true },
-  },
-  {
     path: '/detalle/:id',
     component: Detalle,
     children: [
@@ -40,6 +33,21 @@ const routes = [
       { path: 'personal', component: Personal },
       { path: 'posters', component: Posters },
       { path: 'fondos', component: Fondos },
+    ],
+  },
+  {
+    path: '/autorizacion',
+    component: ConfirmacionTMDB,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/usuario',
+    component: Usuario,
+    meta: { requiresAuth: true },
+    children: [
+      { path: '', component: Listas },
+      { path: 'lista/:id', component: DetalleLista },
+      { path: 'crearlista', component: CrearLista },
     ],
   },
   {
@@ -62,7 +70,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (to.path === '/listas') {
+    if (to.path.includes('/usuario')) {
       if (!store.getters.isValidToken) {
         const conf = confirm('Tu sesión ha expirado. Deseas renovarla?')
         if (!conf) {

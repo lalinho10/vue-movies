@@ -13,7 +13,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('obtenerSessionID')
-            .then(() => this.$router.push('/listas'))
+            .then(() => this.$router.push('/usuario'))
             .catch(() => this.$router.push('/'))
     }
 }

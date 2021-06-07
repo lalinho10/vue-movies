@@ -5,6 +5,7 @@ const moduloUsuario = {
     state: () => ({
         usuario: null,
         listas: [],
+        listaSeleccionada: null,
     }),
     mutations,
     actions,

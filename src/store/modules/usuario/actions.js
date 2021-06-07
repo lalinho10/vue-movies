@@ -21,3 +21,14 @@ export const obtenerListas = (context, payload) => {
             .catch(() => reject());
     })
 }
+
+export const obtenerListaSeleccionada = (context, payload) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`/list/${payload}?api_key=${process.env.VUE_APP_TMDB_API_KEY}`)
+            .then((response) => {
+                context.commit('actualizarListaSeleccionada', response.data);
+                resolve();
+            })
+            .catch(() => reject());
+    })
+}
