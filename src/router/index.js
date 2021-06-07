@@ -10,7 +10,7 @@ import Elenco from '../views/Elenco.vue'
 import Error404 from '../views/Error404.vue'
 import Fondos from '../views/Fondos.vue'
 import Home from '../views/Home.vue'
-import Lista from '../views/Lista.vue'
+import Listas from '../views/Listas.vue'
 import Personal from '../views/Personal.vue'
 import Posters from '../views/Posters.vue'
 
@@ -23,8 +23,8 @@ const routes = [
     component: Home,
   },
   {
-    path: '/lista',
-    component: Lista,
+    path: '/listas',
+    component: Listas,
     meta: { requiresAuth: true },
   },
   {
@@ -62,7 +62,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (to.path === '/lista') {
+    if (to.path === '/listas') {
       if (!store.getters.isValidToken) {
         const conf = confirm('Tu sesión ha expirado. Deseas renovarla?')
         if (!conf) {

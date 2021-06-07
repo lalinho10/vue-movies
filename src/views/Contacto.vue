@@ -131,7 +131,7 @@ export default {
       }
     }
   },
-  beforeRouteLeave(next) {
+  beforeRouteLeave(to, from, next) {
     if (!this.$refs.formContacto.validate()) {
       if (confirm('Hay campos pendientes de capturar en tu formulario. ¿Estás seguro que deseas continuar?')) {
         next()

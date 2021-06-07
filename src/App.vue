@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-tabs>
         <v-tab to="/">Inicio</v-tab>
-        <v-tab to="/lista">Mi lista</v-tab>
+        <v-tab to="/listas">Mis listas</v-tab>
         <v-tab to="/contacto">Contáctanos</v-tab>
       </v-tabs>
     </v-app-bar>
