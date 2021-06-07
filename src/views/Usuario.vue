@@ -9,7 +9,7 @@
             </span>
             <v-btn color="primary" to="/usuario/crearlista">Crear lista</v-btn>
         </div>
-        <hr class="my-2">
+        <hr class="my-4">
         <router-view></router-view>
     </div>
 
@@ -28,8 +28,7 @@ export default {
         }
     },
     mounted() {
-        const sessionId = this.$store.state.moduloAutenticacion.sessionId
-        this.$store.dispatch('obtenerCuenta', sessionId)
+        this.$store.dispatch('obtenerCuenta')
             .then(() => this.usuario = this.$store.state.moduloUsuario.usuario)
     },
 }

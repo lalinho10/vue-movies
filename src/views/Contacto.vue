@@ -94,8 +94,8 @@
           ></v-switch>
         </v-col>
       </v-row>
-      <v-row no-gutters justify="end">
-        <v-col>
+      <v-row no-gutters>
+        <v-col class="d-flex justify-end">
           <v-btn color="primary" @click="guardar">Enviar</v-btn>
         </v-col>
       </v-row>
@@ -128,6 +128,7 @@ export default {
     guardar() {
       if (this.$refs.formContacto.validate()) {
         console.log(this.contacto)
+        this.$router.push('/')
       }
     }
   },

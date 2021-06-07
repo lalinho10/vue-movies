@@ -4,6 +4,16 @@
 
         <cargando v-if="cargando" />
 
+        <v-alert v-else-if="listas.length === 0"
+            dense
+            outlined
+            prominent
+            class="mt-4"
+            border="left"
+            type="info">
+            No has creado ninguna lista
+        </v-alert>
+
         <v-list v-else>
             <v-list-item v-for="lista in listas" :key="lista.id">
                 <v-list-item-avatar>
@@ -20,7 +30,7 @@
                         {{lista.name}}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        {{lista.description}}
+                        {{lista.description}} <i>({{lista.item_count}} elementos)</i>
                     </v-list-item-subtitle>
                 </v-list-item-content>
 
@@ -48,10 +58,9 @@ export default {
         }
     },
     mounted() {
-        const sessionId = this.$store.state.moduloAutenticacion.sessionId
         const accountId = this.$store.state.moduloUsuario.usuario.id
 
-        this.$store.dispatch('obtenerListas', { accountId, sessionId })
+        this.$store.dispatch('obtenerListas', accountId)
             .then(() => {
                 this.listas = this.$store.state.moduloUsuario.listas
                 this.cargando = false

@@ -5,7 +5,7 @@
         <v-card-title class="text-wrap">
             {{titulo}}
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="text-wrap">
             {{detalle}}
         </v-card-text>
     </v-card>
@@ -20,3 +20,9 @@ export default {
     ],
 }
 </script>
+
+<style scoped>
+.v-card__title, .v-card__text {
+  word-break: normal !important
+}
+</style>

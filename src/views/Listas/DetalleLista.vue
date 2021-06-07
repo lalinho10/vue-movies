@@ -1,17 +1,28 @@
 <template>
     <cargando v-if="!lista"></cargando>
+
     <v-row v-else>
         <v-col cols="12">
             <v-btn fab top left small to="/usuario">
                 <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
         </v-col>
-        <v-col cols="12">
+        <v-col class="pb-0" cols="12">
             <h1>{{lista.name}}</h1>
             <p>{{lista.description}}</p>
         </v-col>
-        <v-col cols="12">
-            <v-list>
+        <v-col class="pt-0" cols="12">
+            <v-alert v-if="lista.items.length === 0"
+                dense
+                outlined
+                prominent
+                class="mt-4"
+                border="left"
+                type="info">
+                La lista no contiene elementos
+            </v-alert>
+
+            <v-list v-else>
                 <v-list-item v-for="item in lista.items" :key="item.id">
                     <v-list-item-avatar>
                         <img :src="poster(item.poster_path)">

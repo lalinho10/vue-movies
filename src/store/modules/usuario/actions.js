@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const obtenerCuenta = (context, payload) => {
+export const obtenerCuenta = (context) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/account?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${payload}`)
+        axios.get(`/account?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${context.rootState.moduloAutenticacion.sessionId}`)
             .then((response) => {
                 context.commit('actualizarCuenta', response.data);
                 resolve();
@@ -13,7 +13,7 @@ export const obtenerCuenta = (context, payload) => {
 
 export const obtenerListas = (context, payload) => {
     return new Promise((resolve, reject) => {
-        axios.get(`/account/${payload.accountId}/lists?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${payload.sessionId}`)
+        axios.get(`/account/${payload}/lists?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${context.rootState.moduloAutenticacion.sessionId}`)
             .then((response) => {
                 context.commit('actualizarListas', response.data.results);
                 resolve();
