@@ -4,6 +4,7 @@ import * as mutations from './mutations'
 const moduloUsuario = {
     state: () => ({
         usuario: null,
+        idListaCreada: null,
         listas: [],
         listaSeleccionada: null,
     }),

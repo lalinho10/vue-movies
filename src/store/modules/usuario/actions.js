@@ -1,5 +1,19 @@
 import axios from 'axios'
 
+export const crearLista = (context, payload) => {
+    return new Promise((resolve, reject) => {
+        axios.post(
+            `/list?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${context.rootState.moduloAutenticacion.sessionId}`,
+            payload,
+        )
+        .then((response) => {
+            context.commit('actualizarIdListaCreada', response.data.list_id);
+            resolve();
+        })
+        .catch(() => reject());
+    })
+}
+
 export const obtenerCuenta = (context) => {
     return new Promise((resolve, reject) => {
         axios.get(`/account?api_key=${process.env.VUE_APP_TMDB_API_KEY}&session_id=${context.rootState.moduloAutenticacion.sessionId}`)

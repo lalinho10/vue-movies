@@ -1,5 +1,5 @@
 <template>
-    <cargando v-if="!lista"></cargando>
+    <cargando v-if="!lista && !error"></cargando>
 
     <v-row v-else>
         <v-col cols="12">
@@ -12,7 +12,17 @@
             <p>{{lista.description}}</p>
         </v-col>
         <v-col class="pt-0" cols="12">
-            <v-alert v-if="lista.items.length === 0"
+            <v-alert v-if="!lista.items && error"
+                dense
+                outlined
+                prominent
+                class="mt-4"
+                border="left"
+                type="error">
+                Lista no encontrada
+            </v-alert>
+
+            <v-alert v-else-if="lista.items.length === 0"
                 dense
                 outlined
                 prominent
@@ -55,12 +65,17 @@ export default {
     data() {
         return {
             lista: null,
+            error: false,
         }
     },
     mounted() {
         this.$store.dispatch('obtenerListaSeleccionada', this.$route.params.id)
             .then(() => {
                 this.lista = this.$store.state.moduloUsuario.listaSeleccionada
+            })
+            .catch(() => {
+                this.lista = {}
+                this.error = true
             })
     },
 }
